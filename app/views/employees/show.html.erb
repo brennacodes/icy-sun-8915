@@ -40,5 +40,21 @@
   </div>
 </p>
 
+<% form_with url: "employees/#{@employee.id}", method: :patch do |form| %>
+  <div class="employee_id" style="hidden">
+    <%= form.label "Employee ID" %>
+    <%= form.number_field "employee id", { value: "#{@employee.id}" } %>
+  </div>
+
+  <div class="ticket_id">
+    <%= form.label :ticket_id %>
+    <%= form.number_field :ticket_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>

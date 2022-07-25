@@ -17,7 +17,8 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params)
-
+    @tickets = Tickets.all.pluck(:id)
+    
     respond_to do |format|
       if @employee.save
         format.html { redirect_to employee_url(@employee), notice: "Employee was successfully created." }

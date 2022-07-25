@@ -1,24 +1,24 @@
-<%= form_with(model: employee_ticket, local: true) do |form| %>
-  <% if employee_ticket.errors.any? %>
+<%= form_with(model: employee_tickets, local: true) do |form| %>
+  <% if @employee.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(employee_ticket.errors.count, "error") %> prohibited this employee_ticket from being saved:</h2>
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee_ticket from being saved:</h2>
 
       <ul>
-      <% employee_ticket.errors.full_messages.each do |message| %>
+      <% @employee.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="employee_id" style="hidden">
     <%= form.label :employee_id %>
-    <%= form.text_field :employee_id %>
+    <%= form.text_field :employee_id, { value: "#{@employee.id}" }.to_i %>
   </div>
 
-  <div class="field">
+  <div class="ticket_id">
     <%= form.label :ticket_id %>
-    <%= form.text_field :ticket_id %>
+    <%= form.select :ticket_id, @tickets %>
   </div>
 
   <div class="actions">
