@@ -26,4 +26,10 @@ RSpec.describe 'Department index page' do
     expect(page).to have_content(department_5.name)
     expect(page).to have_content(department_5.floor)
   end
+
+  it "renders a list of departments" do
+    render
+    assert_select "tr>td", text: "Name".to_s, count: 2
+    assert_select "tr>td", text: 2.to_s, count: 2
+  end
 end
