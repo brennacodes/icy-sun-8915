@@ -9,41 +9,27 @@ class EmployeesController < ApplicationController
   end
 
   def new
-    @employee = Employee.new
   end
 
   def edit
   end
 
   def create
-    @employee = Employee.new(employee_params)
-    @tickets = Tickets.all.pluck(:id)
-    
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to employee_url(@employee), notice: "Employee was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
   end
-
+  
   def update
+    @employee_ticket = EmployeeTicket.create!(employee_id: @employee.id, ticket_id: params[:ticket_id])
+
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee_ticket.save
         format.html { redirect_to employee_url(@employee), notice: "Employee was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, notice: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @employee.destroy
-
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: "Employee was successfully destroyed." }
-    end
   end
 
   private
@@ -52,6 +38,6 @@ class EmployeesController < ApplicationController
     end
 
     def employee_params
-      params.require(:employee).permit(:subject, :age)
+      params.permit(:subject, :age)
     end
 end

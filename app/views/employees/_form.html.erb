@@ -1,27 +1,24 @@
-<%= form_with(model: employee, local: true) do |form| %>
-  <% if employee.errors.any? %>
+<%= form_with(model: employee, method: :patch, local: true) do |form| %>
+  <% if @employee.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
       <ul>
-      <% employee.errors.full_messages.each do |message| %>
+      <% @employee.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="employee_id">
+    <%= form.number_field "employee id", {type: "hidden", value: "#{@employee.id}" }%>
   </div>
 
-  <div class="field">
-    <%= form.label :level %>
-    <%= form.number_field :level %>
-  </div>
+  <%= form.label :ticket_id %>
+  <%= form.number_field :ticket_id %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Add New Ticket" %>
   </div>
 <% end %>
