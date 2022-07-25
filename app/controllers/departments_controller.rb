@@ -3,6 +3,7 @@ class DepartmentsController < ApplicationController
 
   def index
     @departments = Department.all
+    @employees = @departments.employees
   end
 
   def show

@@ -10,6 +10,13 @@ RSpec.describe 'Department index page' do
   let!(:department_2) {Department.create(name: 'HR', floor: 2)}
   let!(:department_3) {Department.create(name: 'Marketing', floor: 3)}
 
+  it "renders a list of departments" do
+    visit departments_path
+
+    assert_selector "tr>td", text: "Engineering", count: 1
+    assert_selector "tr>td", text: 1.to_s, count: 1
+  end
+
   it "displays each department's name and floor" do
     visit departments_path
 
@@ -23,10 +30,5 @@ RSpec.describe 'Department index page' do
     end
   end
 
-  it "renders a list of departments" do
-    visit departments_path
-
-    assert_selector "tr>td", text: "Engineering", count: 1
-    assert_selector "tr>td", text: 1.to_s, count: 1
-  end
+  
 end
