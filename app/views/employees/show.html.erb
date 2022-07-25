@@ -1,14 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Subject:</strong>
-  <%= @ticket.subject %>
+  <strong>Name:</strong>
+  <%= @employee.name %>
 </p>
 
 <p>
-  <strong>Age:</strong>
-  <%= @ticket.age %>
+  <strong>Level:</strong>
+  <%= @employee.level %>
 </p>
 
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+<p>
+  <strong>Department:</strong>
+  <%= @employee.department.name %>
+</p>
+
+<p>
+  <strong>Oldest Ticket:</strong>
+  <%= @employee.oldest_ticket.subject %>
+  <%= @employee.oldest_ticket.created_at %>
+</p>
+
+<p>
+  <strong>All Tickets:</strong>
+  <ul>
+  <% @employee.tickets_by_date_desc.each do |ticket| %>
+    <li><%= ticket.subject %>: <%= ticket.created_at %></li>
+  <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
